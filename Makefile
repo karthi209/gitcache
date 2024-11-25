@@ -18,15 +18,10 @@ APP_VERSION          := 1.0.21
 ALL_TARGET           := check-style.venv
 SCRIPT               := src/gitcache
 
-UBUNTU_DIST_VERSIONS := 20.04 22.04 24.04
-ALPINE_DIST_VERSIONS := 3.20
+RHEL_VERSIONS        := 8
 MAKE4PY_DOCKER_IMAGE := make4py-gitcache
-MAKE4PY_DOCKER_PKGS  := git git-lfs
-MAKE4PY_ALPINE_DOCKER_PKGS  := git git-lfs
-
-PYINSTALLER_ARGS_LINUX   := --clean --onefile
-PYINSTALLER_ARGS_DARWIN  := --clean --onedir
-PYINSTALLER_ARGS_WINDOWS := --clean --onefile
+MAKE4PY_DOCKER_PKGS  := git git-lfs python3-pip
+PYINSTALLER_ARGS_LINUX := --clean --onefile
 
 
 # ----------------------------------------------------------------------------
@@ -40,7 +35,7 @@ include .make4py/make4py.mk
 # ----------------------------------------------------------------------------
 .PHONY: precheck-releases
 
-precheck-releases: check-style.ubuntu22.04 tests.all doc man releases test-releases
+precheck-releases: check-style.rhel8 tests.all doc man releases test-releases
 
 
 # ----------------------------------------------------------------------------
